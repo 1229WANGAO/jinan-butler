@@ -20,7 +20,9 @@ const TOKEN = process.env.WX_TOKEN || 'JinanButler_71b5cd406bcff9421ed6bc68';
 const ENCODING_AES_KEY = process.env.WX_AESKEY || 'OL0UeAcz2M1i9eWjyzdAKDOWHY1JEups/Ah7N7duuuo'; // 43 位
 const CORP_ID = process.env.WX_CORPID || 'your-corp-id';
 const PORT = process.env.PORT || 3001;
-const MSG_FILE = path.join(__dirname, 'messages.json');
+// 消息落盘目录：容器重启会清空本地盘，云托管可在控制台挂载「文件存储」到某路径（如 /data）并设置 MSG_DIR=/data 实现持久化
+const MSG_DIR = process.env.MSG_DIR || __dirname;
+const MSG_FILE = path.join(MSG_DIR, 'messages.json');
 // =========================================
 
 function sha1(s) { return crypto.createHash('sha1').update(s, 'utf8').digest('hex'); }

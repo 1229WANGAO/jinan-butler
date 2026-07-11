@@ -13,6 +13,7 @@ COPY index.html ./
 RUN echo '[]' > messages.json
 
 # 平台会通过环境变量 PORT 注入端口；本地默认 3001
+# 云托管如需消息持久化：挂载「文件存储」到 /data 并设置环境变量 MSG_DIR=/data
 EXPOSE 3000 3001
 
 ENV NODE_ENV=production
