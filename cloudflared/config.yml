@@ -1,0 +1,30 @@
+# ============================================================
+# cloudflared 固定隧道配置（内网穿透，长期稳定地址）
+# 作用：把公网请求转发到本机 server.js（端口 3001）
+# ============================================================
+#
+# 【使用前必须做的两步（需你本人操作，因为要浏览器登录）】
+# 1) 安装 cloudflared（见 start-tunnel.bat 顶部提示，或 winget install --id Cloudflare.cloudflared）
+# 2) 命令行执行：
+#      cloudflared login                      # 浏览器登录 Cloudflare 免费账号
+#      cloudflared tunnel create jinan-butler # 创建命名隧道，记下输出的 Tunnel ID（一串 UUID）
+#
+# 然后把下面 <TUNNEL_ID> 替换成你创建的 UUID，
+# 并把 credentials-file 路径改成实际生成的 json（默认在
+# C:\Users\dell\.cloudflared\<TUNNEL_ID>.json）。
+#
+# 路由说明：下面 ingress 不写 hostname，表示"所有流量都转给本机 3001"。
+# 运行后 Cloudflare 会分配一个固定地址：https://<TUNNEL_ID>.cfargotunnel.com
+# （这就是你填到企业微信回调的域名，长期不变）
+#
+# 如果你有自己接入 Cloudflare 的域名，可额外加一行 hostname 并运行
+#   cloudflared tunnel route dns jinan-butler butler.你的域名.com
+# 即可用自定义域名（可选）。
+# ============================================================
+
+tunnel: <TUNNEL_ID>
+credentials-file: C:\Users\dell\.cloudflared\<TUNNEL_ID>.json
+
+ingress:
+  - service: http://localhost:3001
+  - service: http_status:404

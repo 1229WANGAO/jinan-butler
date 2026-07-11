@@ -1,0 +1,18 @@
+# Render Blueprint 配置（一键部署）
+# 使用方式：把本目录推到 GitHub 仓库 → Render 后台 New → Blueprint → 选择该仓库
+# 部署后 Render 会自动分配 https 域名，打开即是用后端的工作台完整版。
+services:
+  - type: web
+    name: jinan-butler
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    # Render 会自动注入 PORT（容器需监听 $PORT），无需在此写死。
+    # 下面是企微回调需要的 3 个参数，部署时按提示填写（与 server.js 顶部默认值一致也可留空用默认值）。
+    envVars:
+      - key: WX_TOKEN
+        sync: false
+      - key: WX_AESKEY
+        sync: false
+      - key: WX_CORPID
+        sync: false

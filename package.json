@@ -1,0 +1,13 @@
+{
+  "name": "jinan-butler-wechat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "济南基地管家工作台 · 企业微信消息后端（纯 Node，零依赖）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
